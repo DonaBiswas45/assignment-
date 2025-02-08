@@ -40,7 +40,8 @@
               eventItem.innerHTML = `
                 <h3>${event.title}</h3>
                 <p>${event.description}</p>
-                <p><a href="${event.link}" target="_blank">More Info</a></p>
+                <input type="email" placeholder="Enter your email" class="emailInput" />
+                <button onclick="getTickets('${event.link}', this)">GET TICKETS</button>
                 <hr>
               `;
               eventsDiv.appendChild(eventItem);
@@ -52,6 +53,20 @@
           console.error("Error fetching events:", error);
         }
       }
+
+      function getTickets(eventLink, button) {
+        const emailInput = button.previousElementSibling;
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          alert("Please enter your email to proceed.");
+          return;
+        }
+
+        alert("Thank you! Redirecting you to the ticket page...");
+        window.location.href = eventLink;
+      }
     </script>
   </body>
 </html>
+
