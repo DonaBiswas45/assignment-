@@ -5,31 +5,22 @@ Report
 
 Event Search Web App: Development Report
 
-Approach
-
-The development of this web application followed a structured approach:
+Approach: The development of this web application followed a structured approach:
 
 Frontend Development:
 
 Designed a simple and user-friendly UI using HTML and JavaScript.
-
 Implemented event search functionality with dynamic event rendering.
-
 Added an email input field and redirection logic for ticket purchases.
 
-
 Backend Development:
-
 Set up an Express.js server to handle API requests.
-
 Integrated SerpApi to fetch event details dynamically.
-
 Implemented error handling for API requests and user input validation.
 
 Deployment and Testing:
-
 Tested the application locally using Node.js.
 
-Ensured API calls returned valid responses and handled errors effectively.
+Node.js command to openfile:
+Node index.js
 
-. 
