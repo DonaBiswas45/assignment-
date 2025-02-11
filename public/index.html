@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>assignment</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Event Search</title>
   </head>
   <body>
@@ -30,7 +21,7 @@
         }
 
         try {
-          const response = await fetch("/search-events", {
+          const response = await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ city }),
@@ -50,8 +41,9 @@
               eventItem.innerHTML = `
                 <h3>${event.title}</h3>
                 <p>${event.description}</p>
-                <p><a href="${event.link}" target="_blank">More Info</a></p>
-                <hr>
+                <input type="email" placeholder="Enter your email" class="emailInput" />
+                <button onclick="getTickets('${event.link}', this)">GET TICKETS</button>
+                
               `;
               eventsDiv.appendChild(eventItem);
             });
@@ -62,11 +54,19 @@
           console.error("Error fetching events:", error);
         }
       }
+
+      function getTickets(eventLink, button) {
+        const eventContainer = button.parentElement; // Get parent container
+        const emailInput = eventContainer.querySelector(".emailInput"); // Find email input
+
+        if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        alert("Thank you! Redirecting to the event page...");
+        window.open(eventLink, "_blank");
+      }
     </script>
   </body>
-</html>
-<!-- partial -->
-  <script type="module" src="./script.js"></script>
-
-</body>
 </html>

@@ -1,11 +1,11 @@
 const express = require("express");
 const path = require("path");
-const { SerpAPI } = require("serpapi"); // Corrected import for SerpAPI
+require("dotenv").config();
+const { getJson } = require("serpapi");
 
 const app = express();
 const PORT = 3000;
-
-const API_KEY = "ba76e056f2f4c554ed648e2ff49054d06377cd3b7a11dc065bb6887ffeb1c127"; 
+const API_KEY = process.env.API_KEY;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 // Handle POST request to fetch events
-app.post("/search-events", async (req, res) => {
+app.post("/", async (req, res) => {
   const { city } = req.body;
 
   if (!city) {
@@ -24,22 +24,21 @@ app.post("/search-events", async (req, res) => {
   }
 
   try {
-    const search = new SerpAPI(API_KEY);
-    search.json(
-      {
-        engine: "google_events",
-        q: `Events in ${city}`,
-        hl: "en",
-        gl: "in",
-      },
-      (data) => {
-        if (data.events_results) {
-          res.json({ events: data.events_results });
-        } else {
-          res.status(404).json({ error: "No events found" });
-        }
-      }
-    );
+    const result = await getJson({
+      engine: "google_events",
+      q: `Events in ${city}`,
+      hl: "en",
+      gl: "in",
+      api_key: API_KEY,
+    });
+
+    if (result.events_results) {
+      const data = result.events_result;
+      console.log(data);
+      res.json({ events: result.events_results });
+    } else {
+      res.status(500).json({ error: "No events found" });
+    }
   } catch (error) {
     console.error("Error fetching events:", error);
     res.status(500).json({ error: "Failed to fetch events" });

@@ -41,34 +41,25 @@ button:hover {
   margin-top: 20px;
 }
 
-.event-card {
+#eventsList div {
   background: white;
   padding: 15px;
   margin: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 80%;
-  max-width: 400px;
+  max-width: 600px;
+  text-align: left;
 }
 
-.event-card h3 {
-  color: #333;
-}
-
-.event-card p {
-  color: #555;
-}
-
-.get-tickets {
-  display: block;
-  text-decoration: none;
-  background-color: #28a745;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-}
-
-.get-tickets:hover {
-  background-color: #218838;
+#eventsList button {
+  background-color: red;
+  padding: 10px 10px;
+  color: yellow;
+  margin: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
